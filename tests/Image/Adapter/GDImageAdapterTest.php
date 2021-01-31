@@ -23,7 +23,7 @@ class GDImageAdapterTest extends BaseImageAdapterTest
     {
         // Checks object state
         $image = $adapter->getResource();
-        $this->assertInternalType('resource', $image);
+        $this->assertIsResource($image);
         $this->assertSame('gd', get_resource_type($image));
     }
 
