@@ -163,6 +163,22 @@ class ImageLoaderTest extends \PHPUnit\Framework\TestCase
         $this->baseTestLoadFile('Gmagick', false, true);
     }
 
+    /**
+     * @requires extension gd
+     */
+    public function testLoadWebpFileWithGD(): void
+    {
+        $this->baseTestLoadFile('GD', false, false, __DIR__.'/../images/donuts_PR45.webp');
+    }
+
+    /**
+     * @requires extension imagick
+     */
+    public function testLoadWebpFileWithImagick(): void
+    {
+        $this->baseTestLoadFile('Imagick', true, false, __DIR__.'/../images/donuts_PR45.webp');
+    }
+
     public function testLoadFileMissing(): void
     {
         $this->expectException(\RuntimeException::class);
