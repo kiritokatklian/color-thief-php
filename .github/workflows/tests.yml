@@ -34,15 +34,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install WebP libs
-      run: |
-        sudo apt libwebp-dev build-dep imagemagick
-        wget https://imagemagick.org/download/ImageMagick.tar.gz
-        tar xvzf ImageMagick.tar.gz
-        cd into the dir
-        ./configure --with-webp=yes
-        sudo make
-        sudo make install
-        sudo ldconfig /usr/local/lib
+      run: sudo apt-get install libwebp-dev
 
     - name: Install PHP with extensions
       uses: shivammathur/setup-php@verbose
