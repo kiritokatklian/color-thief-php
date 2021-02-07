@@ -33,8 +33,19 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Install WebP libs
+      run: |
+        sudo apt libwebp-dev build-dep imagemagick
+        wget https://imagemagick.org/download/ImageMagick.tar.gz
+        tar xvzf ImageMagick.tar.gz
+        cd into the dir
+        ./configure --with-webp=yes
+        sudo make
+        sudo make install
+        sudo ldconfig /usr/local/lib
+
     - name: Install PHP with extensions
-      uses: shivammathur/setup-php@master
+      uses: shivammathur/setup-php@verbose
       with:
         php-version: ${{ matrix.php-version }}
         extensions: ${{ matrix.php-extensions }}
