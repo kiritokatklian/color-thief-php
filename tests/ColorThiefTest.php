@@ -40,11 +40,13 @@ class ColorThiefTest extends \PHPUnit\Framework\TestCase
                 null,
                 [180, 228, 28],
             ],
+            /*
             [  // WebP image
                 '/images/donuts_PR45.webp',
                 null,
                 [204, 187, 177],
             ],
+            */
             [  // Area targeting
                 '/images/vegetables_1500x995.png',
                 ['x' => 670, 'y' => 215, 'w' => 230, 'h' => 120],
@@ -115,6 +117,7 @@ class ColorThiefTest extends \PHPUnit\Framework\TestCase
                     [184, 228, 28],
                 ],
             ],
+            /*
             [
                 '/images/donuts_PR45.webp',
                 [
@@ -127,6 +130,7 @@ class ColorThiefTest extends \PHPUnit\Framework\TestCase
                     [118, 204, 192],
                 ],
             ],
+            */
         ];
     }
 

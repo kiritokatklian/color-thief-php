@@ -29,15 +29,12 @@ jobs:
           - 7.4
           #- 8.0
         php-extensions:
-          - gd, imagick-3.4.4
+          - gd, imagick
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install WebP libs
-      run: sudo apt-get install libwebp-dev
-
     - name: Install PHP with extensions
-      uses: shivammathur/setup-php@verbose
+      uses: shivammathur/setup-php@master
       with:
         php-version: ${{ matrix.php-version }}
         extensions: ${{ matrix.php-extensions }}
