@@ -10,6 +10,11 @@ class ColorThiefTest extends \PHPUnit\Framework\TestCase
     {
         return [
             [
+                '/images/field_1024x683.webp',
+                null,
+                [123, 170, 218],
+            ],
+            [
                 '/images/rails_600x406.gif',
                 null,
                 [88, 70, 80],
@@ -79,12 +84,12 @@ class ColorThiefTest extends \PHPUnit\Framework\TestCase
                     [224, 71, 106],
                     [21, 50, 129],
                     [143, 232, 249],
-                    [238, 178, 162],
+                    [238, 178, 163],
                     [163, 173, 59],
                     [94, 158, 245],
                     [99, 173, 248],
                     [120, 181, 170],
-                    [68, 168, 168],
+                    [68, 164, 168],
                 ],
             ],
             [
@@ -195,21 +200,24 @@ class ColorThiefTest extends \PHPUnit\Framework\TestCase
 
     public function testGetPaletteWithTooFewColors()
     {
-        $this->setExpectedException('\InvalidArgumentException', 'The number of palette colors');
+        $this->expectException('\InvalidArgumentException');
+        $this->expectExceptionMessage('The number of palette colors');
 
         ColorThief::getPalette('foo.jpg', 1);
     }
 
     public function testGetPaletteWithTooManyColors()
     {
-        $this->setExpectedException('\InvalidArgumentException', 'The number of palette colors');
+        $this->expectException('\InvalidArgumentException');
+        $this->expectExceptionMessage('The number of palette colors');
 
         ColorThief::getPalette('foo.jpg', 120000);
     }
 
     public function testGetPaletteWithInvalidQuality()
     {
-        $this->setExpectedException('\InvalidArgumentException', 'quality argument');
+        $this->expectException('\InvalidArgumentException');
+        $this->expectExceptionMessage('quality argument');
 
         ColorThief::getPalette('foo.jpg', 5, 0);
     }
@@ -219,7 +227,9 @@ class ColorThiefTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetPaletteWithBlankImage()
     {
-        $this->setExpectedException('\RuntimeException', 'blank or transparent image', 1);
+        $this->expectException('\RuntimeException');
+        $this->expectExceptionMessage('blank or transparent image');
+        $this->expectExceptionCode(1);
 
         ColorThief::getPalette(__DIR__ . '/images/blank.png');
     }

@@ -12,12 +12,12 @@ class VBoxTest extends \PHPUnit\Framework\TestCase
      */
     protected $vbox;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->vbox = new VBox(0, 255, 0, 255, 0, 255, null);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->vbox = null;
     }

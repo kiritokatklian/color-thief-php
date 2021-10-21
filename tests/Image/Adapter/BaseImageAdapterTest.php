@@ -61,6 +61,11 @@ abstract class BaseImageAdapterTest extends \PHPUnit\Framework\TestCase
         return $this->baseTestLoadFile(__DIR__ . '/../../images/rails_600x406.gif');
     }
 
+    public function testLoadFileWebp()
+    {
+        return $this->baseTestLoadFile(__DIR__ . '/../../images/field_1024x683.webp');
+    }
+
     /**
      * @see Issue #13
      */
@@ -76,7 +81,8 @@ abstract class BaseImageAdapterTest extends \PHPUnit\Framework\TestCase
      */
     public function testLoad404Url()
     {
-        $this->setExpectedException('\RuntimeException', 'not readable or does not exists');
+        $this->expectException('\RuntimeException');
+        $this->expectExceptionMessage('not readable or does not exists');
 
         $adapter = $this->getAdapterInstance();
         $adapter->loadFile('http://example.com/pixels.png');
@@ -84,7 +90,8 @@ abstract class BaseImageAdapterTest extends \PHPUnit\Framework\TestCase
 
     public function testLoadFileMissing()
     {
-        $this->setExpectedException('\RuntimeException', 'not readable or does not exists');
+        $this->expectException('\RuntimeException');
+        $this->expectExceptionMessage('not readable or does not exists');
 
         $adapter = $this->getAdapterInstance();
         $adapter->loadFile('Not a file');
@@ -92,7 +99,7 @@ abstract class BaseImageAdapterTest extends \PHPUnit\Framework\TestCase
 
     public function testLoadInvalidArgument()
     {
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->expectException('\InvalidArgumentException');
 
         $adapter = $this->getAdapterInstance();
         /* @noinspection PhpParamsInspection */
@@ -118,7 +125,7 @@ abstract class BaseImageAdapterTest extends \PHPUnit\Framework\TestCase
 
     public function testLoadBinaryStringInvalidArgument()
     {
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->expectException('\InvalidArgumentException');
 
         $adapter = $this->getAdapterInstance();
         $adapter->loadBinaryString('test');
