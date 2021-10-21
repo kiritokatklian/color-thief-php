@@ -47,9 +47,12 @@ class GDImageAdapter extends ImageAdapter
                 $resource = @imagecreatefrompng($file);
                 break;
 
+            case IMAGETYPE_WEBP:
+                $resource = @imagecreatefromwebp($file);
+                break;
+
             default:
                 throw new \RuntimeException("Image '{$file}' is not readable or does not exists.");
-                break;
         }
 
         if ($resource === false) {
