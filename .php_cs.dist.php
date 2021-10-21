@@ -1,5 +1,7 @@
 <?php
-return PhpCsFixer\Config::create()
+$config = new PhpCsFixer\Config();
+
+return $config
     ->setRiskyAllowed(true)
     ->setRules([
         '@Symfony' => true,
@@ -13,7 +15,7 @@ return PhpCsFixer\Config::create()
         'no_useless_return' => true,
         'phpdoc_add_missing_param_annotation' => true,
         'phpdoc_order' => true,
-        'trailing_comma_in_multiline_array' => true,
+        'trailing_comma_in_multiline' => true,
         'yoda_style' => false,
     ])
     ->setFinder(
