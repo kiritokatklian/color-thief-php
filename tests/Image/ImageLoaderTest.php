@@ -8,7 +8,7 @@ class ImageLoaderTest extends \PHPUnit\Framework\TestCase
 {
     protected $loader;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->loader = new ImageLoader();
     }
@@ -16,7 +16,7 @@ class ImageLoaderTest extends \PHPUnit\Framework\TestCase
     protected function getAdapterMock($adapterName, $method, $image)
     {
         $adapter = $this->getMockBuilder("ColorThief\\Image\\Adapter\\{$adapterName}ImageAdapter")
-            ->setMethods([$method])
+            ->onlyMethods([$method])
             ->getMock();
 
         $adapter->expects($this->once())
@@ -43,7 +43,7 @@ class ImageLoaderTest extends \PHPUnit\Framework\TestCase
         }
 
         $loader = $this->getMockBuilder('ColorThief\\Image\\ImageLoader')
-            ->setMethods($methods)
+            ->onlyMethods($methods)
             ->getMock();
 
         $loader->expects($this->once())
@@ -96,7 +96,8 @@ class ImageLoaderTest extends \PHPUnit\Framework\TestCase
 
     public function testLoadInvalidResource()
     {
-        $this->setExpectedException('\InvalidArgumentException', 'Passed variable is not a valid image source');
+        $this->expectException('\InvalidArgumentException');
+        $this->expectExceptionMessage('Passed variable is not a valid image source');
 
         $this->loader->load(42);
     }
@@ -147,7 +148,8 @@ class ImageLoaderTest extends \PHPUnit\Framework\TestCase
 
     public function testLoadFileMissing()
     {
-        $this->setExpectedException('\RuntimeException', 'not readable or does not exists');
+        $this->expectException('\RuntimeException');
+        $this->expectExceptionMessage('not readable or does not exists');
 
         $this->loader->load('Not a file');
     }

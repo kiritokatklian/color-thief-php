@@ -37,7 +37,7 @@ class ImageLoader
                 $image->loadFile($source);
             }
         } else {
-            if ((is_resource($source) && get_resource_type($source) == 'gd')) {
+            if ($this->isGdImage($source)) {
                 $image = $this->getAdapter('GD');
             } elseif (is_a($source, 'Imagick')) {
                 $image = $this->getAdapter('Imagick');
@@ -50,6 +50,20 @@ class ImageLoader
         }
 
         return $image;
+    }
+
+    /**
+     * Check if the given source is a GdImage.
+     *
+     * @return bool
+     */
+    function isGdImage($source)
+    {
+        if (version_compare(PHP_VERSION, '8.0.0') >= 0){
+            return (gettype($source) == 'object' && get_class($source) == 'GdImage');
+        } else {
+            return (is_resource($source) && get_resource_type($source) == 'gd');
+        }
     }
 
     /**

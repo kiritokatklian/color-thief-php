@@ -31,9 +31,19 @@ class ImagickImageAdapterTest extends BaseImageAdapterTest
 
     public function testLoadInvalidArgument()
     {
-        $this->setExpectedException('\InvalidArgumentException', 'Passed variable is not an instance of Imagick');
+        $this->expectException('\InvalidArgumentException');
+        $this->expectExceptionMessage('Passed variable is not an instance of Imagick');
 
         // We want to check also the specific exception message.
         parent::testLoadInvalidArgument();
+    }
+
+    public function testLoadFileWebp()
+    {
+        if (empty(Imagick::queryFormats('WEBP'))) {
+            $this->markTestSkipped('Imagick was not compiled with support for WebP format.');
+        }
+
+        return parent::testLoadFileWebp();
     }
 }
